@@ -8,7 +8,7 @@ class List
 public:
 	List();
 	List(const List<T>& other);
-	~List();
+	~List() {};
 
 	/// <summary>
 	/// Deletes all nodes in the list
@@ -92,3 +92,45 @@ private:
 	Node<T>* m_last;
 	int m_nodeCount;
 };
+
+template<typename T>
+List<T>::List()
+{
+	m_first = nullptr;
+	m_last = nullptr;
+	m_nodeCount = 0;
+}
+
+template<typename T>
+List<T>::List(const List<T>& other)
+{
+	
+}
+
+template<typename T>
+inline void List<T>::destroy()
+{
+
+}
+
+template<typename T>
+inline Iterator<T> List<T>::begin() const
+{
+	return m_first;
+}
+
+template<typename T>
+inline Iterator<T> List<T>::end() const
+{
+	return m_last;
+}
+
+template<typename T>
+inline bool List<T>::contains(const T object) const
+{
+	for (int i = 0; i < m_nodeCount; i++)
+	{
+		if ()
+	}
+	return false;
+}

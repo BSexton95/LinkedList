@@ -10,3 +10,16 @@ public:
 	Node<T>* previous;
 	T data;
 };
+
+template<typename T>
+inline Node<T>::Node()
+{
+	next = nullptr;
+	previous = nullptr;
+}
+
+template<typename T>
+inline Node<T>::Node(T value)
+{
+	data = value;
+}
