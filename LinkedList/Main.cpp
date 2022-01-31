@@ -14,5 +14,6 @@ void main()
 	list.insert(15, 3);
 	list.print();*/
 	list.remove(1);
+	list.remove(2);
 	list.print();
 }

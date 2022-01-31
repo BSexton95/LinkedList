@@ -120,13 +120,13 @@ void List<T>::destroy()
 template<typename T>
 Iterator<T> List<T>::begin() const
 {
-	return m_first;
+	return Iterator<T>(m_first);
 }
 
 template<typename T>
 Iterator<T> List<T>::end() const
 {
-	return m_last;
+	return Iterator<T>(m_last);
 }
 
 //template<typename T>
@@ -250,25 +250,23 @@ bool List<T>::remove(const T& value)
 
 	Node<T>* currentNode = m_first;
 
-	for (int i = 0; i != value; i++)
+	for (Iterator<T> iter = begin(); iter != end(); ++iter)
 	{
-		//Sets the current not to be the next node in the list
-		currentNode = currentNode->next;
-	}
-	if (currentNode != nullptr && currentNode->data == value)
-	{
-		currentNode = currentNode->next;
-		delete currentNode;
-		nodeRemoved = true;
+		if (currentNode->data == value)
+		{
+			currentNode->next->previous = currentNode->previous;
+			currentNode->previous->next = currentNode->next;
+			delete currentNode;
+			m_nodeCount--;
+			nodeRemoved = true;
+		}
+		else
+		{
+			currentNode = currentNode->next;
+		}
 	}
 
-	/*for (Iterator<T> iter = begin(); iter != value->next; iter++)
-	{
-		iter.m_current->next = value.next;
-		value.next.previous = iter.m_current;
-	}*/
-
-	return false;
+	return nodeRemoved;
 }
 
 template<typename T>
