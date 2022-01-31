@@ -8,8 +8,11 @@ void main()
 	list.pushFront(2);
 	list.pushFront(3);
 	list.pushFront(5);
-	list.insert(4, 3);
-	list.pushBack(6);
-
+	list.pushBack(6);/*
+	list.pushFront(10);
+	list.print();
+	list.insert(15, 3);
+	list.print();*/
+	list.remove(1);
 	list.print();
 }

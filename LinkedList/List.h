@@ -151,26 +151,21 @@ void List<T>::pushFront(const T& value)
 
 	//If fist node in the list is not null...
 	if (m_first != nullptr)
-	{
 		//...Set the new nodes next to be the previous fist in the list
 		nodeInserted->next = m_first;
-	}
+	
 
 	//Set the first node in the list to be the new node
 	m_first = nodeInserted;
 
 	//If the new nodes next is not null...
 	if (nodeInserted->next != nullptr)
-	{
 		//...set the new nodes nexts previous to be the new node
 		nodeInserted->next->previous = nodeInserted;
-	}
 	//Otherwise
 	else
-	{
 		//set the last node in the list to be the new node
 		m_last = nodeInserted;
-	}
 
 	//Increment the node count
 	m_nodeCount++;
@@ -206,54 +201,45 @@ void List<T>::pushBack(const T& value)
 template<typename T>
 bool List<T>::insert(const T& value, int index)
 {
-	////Iterate through linked list
-	//for (Iterator<T> iter = begin(); iter == index; iter++)
-	//{
-	//	//Create new node
-	//	Node<T> newNode = new Node<T>;
-	//	newNode.data = value;
-	//	newNode.next = iter.m_current->previous;
-
-	//	//if the current node is not null...
-	//	if (iter.m_current != nullptr)
-	//	{
-	//		//...set the new nodes previous to be the current nodes previous
-	//		newNode.previous = iter.m_current->previous;
-
-	//		//if the current nodes previous is null...
-	//		if (iter.m_current->previous != nullptr)
-	//		{
-	//			//...set the current nodes previouses next to be the new node
-	//			iter.m_current->previous->next = newNode;
-	//		}
-
-	//		//set the current nodes previous to be the new node
-	//		iter.m_current->previous = newNode;
-	//	}
-
-	//	if (m_first == iter.m_current)
-	//		m_first = newNode;
-
-	//	if (m_last->next == nullptr)
-	//		m_last = newNode;
-
-	//}
-
 	bool nodeInserted = false;
 
 	//Create new node
 	Node<T>* newNode = new Node<T>(value);
+	//Set a current node to be the first in the list
 	Node<T>* currentNode = m_first;
 
+	//Interate through the list until it reaches the index to be inserted
 	for (int i = 0; i < index; i++)
 	{
+		//Sets the current not to be the next node in the list
 		currentNode = currentNode->next;
 	}
 
+	//If the current node is not null...
+	if (currentNode != nullptr)
+	{
+		//...set the new nodes previous to be the current nodes previous
+		newNode->previous = currentNode->previous;
+
+		//If the current nodes previous is null...
+		if (currentNode->previous != nullptr)
+		{
+			//...set the current nodes previouses next to be the new node to be inserted
+			currentNode->previous->next = newNode;
+		}
+
+		//set the current nodes previous to be the new node
+		currentNode->previous = newNode;
+	}
+
+	//Set the new nodes next to the current node
 	newNode->next = currentNode;
+	//Set the new nodes previous to teh current nodes previous
 	newNode->previous = currentNode->previous;
+	//Set the current nodes previous to the new node
 	currentNode->previous = newNode;
 
+	//return if the node was inserted
 	return nodeInserted;
 }
 
@@ -264,10 +250,15 @@ bool List<T>::remove(const T& value)
 
 	Node<T>* currentNode = m_first;
 
-
+	for (int i = 0; i != value; i++)
+	{
+		//Sets the current not to be the next node in the list
+		currentNode = currentNode->next;
+	}
 	if (currentNode != nullptr && currentNode->data == value)
 	{
 		currentNode = currentNode->next;
+		delete currentNode;
 		nodeRemoved = true;
 	}
 
@@ -283,14 +274,15 @@ bool List<T>::remove(const T& value)
 template<typename T>
 void List<T>::print() const
 {
-	Node<T>* current;
-
-	current = m_first;
-
-	while (current != nullptr)
+	//Create a current node, set it to be the fist node in the list
+	Node<T>* currentNode = m_first;
+	
+	//While current node is not null...
+	while (currentNode != nullptr)
 	{
-		std::cout << current->data << std::endl;
-		current = current->next;
+		//...print the nodes data to console
+		std::cout << currentNode->data << std::endl;
+		currentNode = currentNode->next;
 	}
 }
 
