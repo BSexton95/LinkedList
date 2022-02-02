@@ -114,7 +114,14 @@ List<T>::List(const List<T>& other)
 template<typename T>
 void List<T>::destroy()
 {
-	
+	Node<T>* currentNode = m_first;
+
+	for (int i = 0; i < getLength(); i++)
+	{
+		
+		currentNode = currentNode->next;
+		delete currentNode;
+	}
 }
 
 template<typename T>
