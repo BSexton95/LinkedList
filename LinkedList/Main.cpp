@@ -15,5 +15,6 @@ void main()
 	list.print();*/
 	list.remove(1);
 	list.remove(2);
+	list.contains(3);
 	list.print();
 }

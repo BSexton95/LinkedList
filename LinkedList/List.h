@@ -25,12 +25,12 @@ public:
 	/// <returns>Returns the nex item after the last node in the list</returns>
 	Iterator<T> end() const;
 
-	/*/// <summary>
+	/// <summary>
 	/// Checks to see if the given item is in the list
 	/// </summary>
 	/// <param name="object">The item to find in the list</param>
 	/// <returns>The item in the list</returns>
-	bool contains(const T object) const;*/
+	bool contains(const T object) const;
 
 	/// <summary>
 	/// Adds a new node to the beginning of the list
@@ -114,7 +114,7 @@ List<T>::List(const List<T>& other)
 template<typename T>
 void List<T>::destroy()
 {
-
+	
 }
 
 template<typename T>
@@ -129,19 +129,25 @@ Iterator<T> List<T>::end() const
 	return Iterator<T>(m_last);
 }
 
-//template<typename T>
-//bool List<T>::contains(const T object) const
-//{
-//	for (Iterator<T> iter = begin(); iter != end(); iter++)
-//	{
-//		if (iter == object)
-//		{
-//			/*std::cout << "Node found" << std::endl;*/
-//			return true;
-//		}
-//	}
-//	return false;
-//}
+template<typename T>
+bool List<T>::contains(const T object) const
+{
+	Node<T>* nodeToFind = m_first;
+
+	for (int i = 0; i < getLength(); i++)
+	{
+		if (nodeToFind->data == object)
+		{
+			std::cout << "Node found" << std::endl;
+			return true;
+		}
+		else
+		{
+			nodeToFind = nodeToFind->next;
+		}
+	}
+	return false;
+}
 
 template<typename T>
 void List<T>::pushFront(const T& value)
@@ -246,26 +252,37 @@ bool List<T>::insert(const T& value, int index)
 template<typename T>
 bool List<T>::remove(const T& value)
 {
+	
 	bool nodeRemoved = false;
 
+	//Create a new node that is set to the first node in the list
 	Node<T>* currentNode = m_first;
 
-	for (Iterator<T> iter = begin(); iter != end(); ++iter)
+	//Iterate through the list
+	for (int i = 0; i < getLength(); i++)
 	{
+		//If the data in the current node is equal to the value that should be removed...
 		if (currentNode->data == value)
 		{
+			//...set the current nodes nexts previous to be teh current nodes previous
 			currentNode->next->previous = currentNode->previous;
+			//set the current nodes previouses next to be the current nodes next
 			currentNode->previous->next = currentNode->next;
-			delete currentNode;
+			//Decrement the node count
 			m_nodeCount--;
+			//delete the current node
+			delete currentNode;
+			//set node removed to be true
 			nodeRemoved = true;
 		}
+		//Otherwise continue through the list
 		else
 		{
 			currentNode = currentNode->next;
 		}
 	}
 
+	//Return if the node removed was true or false
 	return nodeRemoved;
 }
 
