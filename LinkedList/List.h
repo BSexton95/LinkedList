@@ -118,9 +118,10 @@ void List<T>::destroy()
 
 	for (int i = 0; i < getLength(); i++)
 	{
-		
+		if (currentNode != nullptr)
+			delete currentNode;
+
 		currentNode = currentNode->next;
-		delete currentNode;
 	}
 }
 
