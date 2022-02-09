@@ -115,13 +115,19 @@ template<typename T>
 void List<T>::destroy()
 {
 	Node<T>* currentNode = m_first;
+	Node<T>* tempNode = m_first;
 
 	for (int i = 0; i < getLength(); i++)
 	{
 		if (currentNode != nullptr)
-			delete currentNode;
-
-		currentNode = currentNode->next;
+		{
+			tempNode = currentNode;
+			currentNode = currentNode->next;
+			delete tempNode;
+		}
+		else
+			std::cout << "List is empty" << std::endl;
+		
 	}
 }
 
