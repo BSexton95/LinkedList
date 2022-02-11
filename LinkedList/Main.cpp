@@ -21,4 +21,8 @@ void main()
 	list.contains(3);*/
 	list.destroy();
 	list.print();
+	list.print();
+
+	list.pushFront(1);
+	list.print();
 }

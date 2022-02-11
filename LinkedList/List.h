@@ -84,7 +84,7 @@ public:
 	/// <returns>The amount of nodes in the list</returns>
 	int getLength() const { return m_nodeCount; }
 
-	/*const List<T>& operator= (constList<T>& otherList);*/
+	const List<T>& operator= (const List<T>& otherList);
 
 	//void sort();
 
@@ -125,9 +125,8 @@ void List<T>::destroy()
 			currentNode = currentNode->next;
 			delete tempNode;
 		}
-		else
-			std::cout << "List is empty" << std::endl;
-		
+		initialize();
+
 	}
 }
 
