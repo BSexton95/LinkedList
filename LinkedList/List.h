@@ -86,7 +86,7 @@ public:
 
 	const List<T>& operator= (const List<T>& otherList);
 
-	//void sort();
+	void sort();
 
 private:
 	Node<T>* m_first;
@@ -227,6 +227,19 @@ bool List<T>::insert(const T& value, int index)
 	//Set a current node to be the first in the list
 	Node<T>* currentNode = m_first;
 
+	if (index == 0)
+	{
+		pushFront(value);
+		return true;
+
+	}
+
+	if (index == getLength())
+	{
+		pushBack(value);
+		return true;
+	}
+
 	//Interate through the list until it reaches the index to be inserted
 	for (int i = 0; i < index; i++)
 	{
@@ -277,16 +290,25 @@ bool List<T>::remove(const T& value)
 		//If the data in the current node is equal to the value that should be removed...
 		if (currentNode->data == value)
 		{
-			//...set the current nodes nexts previous to be teh current nodes previous
-			currentNode->next->previous = currentNode->previous;
-			//set the current nodes previouses next to be the current nodes next
-			currentNode->previous->next = currentNode->next;
+			if (currentNode->previous == nullptr)
+				m_first = currentNode->next;
+			else if (currentNode->next == nullptr)
+				m_last = currentNode->previous;
+			else
+			{
+				//...set the current nodes nexts previous to be teh current nodes previous
+				currentNode->next->previous = currentNode->previous;
+				//set the current nodes previouses next to be the current nodes next
+				currentNode->previous->next = currentNode->next;
+			}
+			
 			//Decrement the node count
 			m_nodeCount--;
 			//delete the current node
 			delete currentNode;
 			//set node removed to be true
 			nodeRemoved = true;
+			break;
 		}
 		//Otherwise continue through the list
 		else
@@ -306,7 +328,7 @@ void List<T>::print() const
 	Node<T>* currentNode = m_first;
 	
 	//While current node is not null...
-	while (currentNode != nullptr)
+	for (int i = 0; i < getLength(); i++)
 	{
 		//...print the nodes data to console
 		std::cout << currentNode->data << std::endl;
@@ -325,31 +347,62 @@ void List<T>::initialize()
 template<typename T>
 bool List<T>::isEmpty() const
 {
-	return false;
+	if (m_first == nullptr && m_last == nullptr && m_nodeCount == 0)
+		return true;
+	else
+		return false;
 }
 
 template<typename T>
 bool List<T>::getData(Iterator<T>& iter, int index)
 {
-	return false;
+	if (index <= 0 || index > getLength())
+		return false;
+
+	iter = begin();
+
+	for (int i = 0; i < index; i++)
+	{
+		++iter;
+	}
+
+	return true;
 }
 
-//template<typename T>
-//const List<T>& List<T>::operator=(const List<T>& otherList)
-//{
-//	// TODO: insert return statement here
-//}
+template<typename T>
+const List<T>& List<T>::operator=(const List<T>& otherList)
+{
+	destroy();
+	Node<T>* newNode = otherList.m_first;
 
-//template<typename T>
-//void List<T>::sort()
-//{
-//	for (int i = 1; i < m_nodeCount; i++)
-//	{
-//		for (int j = 0; j < m_nodeCount; j++)
-//		{
-//			T tempslot = begin();
-//
-//			if ()
-//		}
-//	}
-//}
+	for (int i = 0; i < otherList.getLength(); i++)
+	{
+		insert(newNode->data, i);
+		newNode = newNode->next;
+	}
+
+	return *this;
+}
+
+template<typename T>
+void List<T>::sort()
+{
+	Node<T>* newNode = new Node<T>();
+	Node<T>* currentNode = m_first;
+
+	for (int i = 0; i < m_nodeCount - 1; i++)
+	{
+		currentNode = m_first;
+
+		for (int j = 0; j < m_nodeCount - 1; j++)
+		{ 
+			if (currentNode->next->data < currentNode->data)
+			{
+				newNode->data = currentNode->next->data;
+				currentNode->next->data = currentNode->data;
+				currentNode->data = newNode->data;
+			}
+			currentNode = currentNode->next;
+		}
+	}
+}
