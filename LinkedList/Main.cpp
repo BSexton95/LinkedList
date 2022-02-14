@@ -53,4 +53,5 @@ void main()
     listTwo.pushFront(88);
 
     listTwo.print();
+    listTwo.contains(88);
 }

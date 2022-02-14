@@ -7,7 +7,15 @@ template<typename T>
 class List
 {
 public:
+	/// <summary>
+	/// Initializes all private veriables to be null
+	/// </summary>
 	List();
+
+	/// <summary>
+	/// Sets a list to have a first and last node and a node count
+	/// </summary>
+	/// <param name="other">The list to initialize</param>
 	List(const List<T>& other);
 	~List() {};
 
@@ -84,6 +92,11 @@ public:
 	/// <returns>The amount of nodes in the list</returns>
 	int getLength() const { return m_nodeCount; }
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="otherList"></param>
+	/// <returns></returns>
 	const List<T>& operator= (const List<T>& otherList);
 
 	void sort();
@@ -126,7 +139,6 @@ void List<T>::destroy()
 			delete tempNode;
 		}
 		initialize();
-
 	}
 }
 
