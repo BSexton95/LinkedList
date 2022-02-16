@@ -17,6 +17,10 @@ public:
 	/// </summary>
 	/// <param name="other">The list to initialize</param>
 	List(const List<T>& other);
+
+	/// <summary>
+	/// Deconstructor for list
+	/// </summary>
 	~List() {};
 
 	/// <summary>
@@ -27,10 +31,8 @@ public:
 	/// <returns>Retruns an iterator pointing to the first node in the list</returns>
 	Iterator<T> begin() const;
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns>Returns the nex item after the last node in the list</returns>
+	
+	/// <returns>Returns the next item after the last node in the list</returns>
 	Iterator<T> end() const;
 
 	/// <summary>
@@ -93,12 +95,15 @@ public:
 	int getLength() const { return m_nodeCount; }
 
 	/// <summary>
-	/// 
+	/// Copies a list over to another
 	/// </summary>
 	/// <param name="otherList"></param>
 	/// <returns></returns>
 	const List<T>& operator= (const List<T>& otherList);
 
+	/// <summary>
+	/// Sorts the list using bubble sort 
+	/// </summary>
 	void sort();
 
 private:
@@ -127,7 +132,10 @@ List<T>::List(const List<T>& other)
 template<typename T>
 void List<T>::destroy()
 {
+	//Create a node that keeps track of the current node and is set to the first node in the list
 	Node<T>* currentNode = m_first;
+	//Create a node that holds the node that will be destroyed 
+	//and is set to the first node in the list
 	Node<T>* tempNode = m_first;
 
 	for (int i = 0; i < getLength(); i++)
