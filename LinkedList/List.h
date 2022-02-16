@@ -28,7 +28,7 @@ public:
 	/// </summary>
 	void destroy();
 
-	/// <returns>Retruns an iterator pointing to the first node in the list</returns>
+	/// <returns>Returns an iterator pointing to the first node in the list</returns>
 	Iterator<T> begin() const;
 
 	
@@ -39,7 +39,7 @@ public:
 	/// Checks to see if the given item is in the list
 	/// </summary>
 	/// <param name="object">The item to find in the list</param>
-	/// <returns>The item in the list</returns>
+	/// <returns>True if the list node was found</returns>
 	bool contains(const T object) const;
 
 	/// <summary>
@@ -66,7 +66,7 @@ public:
 	/// Remove all nodes with the given value
 	/// </summary>
 	/// <param name="value">The value the node, that needs to be removed, has</param>
-	/// <returns></returns>
+	/// <returns>True if the node was successfully remvoed</returns>
 	bool remove(const T& value);
 
 	/// <summary>
@@ -86,7 +86,7 @@ public:
 	/// <summary>
 	/// Sets the given iterator to point to a node at the given index
 	/// </summary>
-	/// <param name="iter">The iterator</param>
+	/// <param name="iter">The iterator to be pointing to the node at the given index</param>
 	/// <param name="index">The index the iterator will point at</param>
 	/// <returns></returns>
 	bool getData(Iterator<T>& iter, int index);
@@ -97,7 +97,7 @@ public:
 	/// <summary>
 	/// Copies a list over to another
 	/// </summary>
-	/// <param name="otherList"></param>
+	/// <param name="otherList">The list</param>
 	/// <returns></returns>
 	const List<T>& operator= (const List<T>& otherList);
 
