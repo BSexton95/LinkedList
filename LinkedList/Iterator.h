@@ -29,11 +29,11 @@ public:
 	Iterator<T> operator--();
 
 	/// <param name="iter">The iterator to compare</param>
-	/// <returns>If the current node is equal to the interator</returns>
+	/// <returns>If the current node is equal to the iterator</returns>
 	const bool operator ==(const Iterator<T>& iter);
 
 	/// <param name="iter">The iterator to compare</param>
-	/// <returns>If the current node is not equal to the intertor</returns>
+	/// <returns>If the current node is not equal to the itertor</returns>
 	const bool operator != (const Iterator<T>& iter);
 
 	/// <summary>
