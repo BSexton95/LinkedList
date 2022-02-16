@@ -138,14 +138,20 @@ void List<T>::destroy()
 	//and is set to the first node in the list
 	Node<T>* tempNode = m_first;
 
+	//Iterate through the list
 	for (int i = 0; i < getLength(); i++)
 	{
+		//If the current node is not null...
 		if (currentNode != nullptr)
 		{
+			//Set the temperary node the be the current node
 			tempNode = currentNode;
+			//Go to the next node
 			currentNode = currentNode->next;
+			//Delete the temperary node
 			delete tempNode;
 		}
+		//Reinitalize all the private variables
 		initialize();
 	}
 }
@@ -165,17 +171,22 @@ Iterator<T> List<T>::end() const
 template<typename T>
 bool List<T>::contains(const T object) const
 {
+	//Create a node that is the node to find and set it to be the first node in the list
 	Node<T>* nodeToFind = m_first;
 
+	//Iterate throught the list
 	for (int i = 0; i < getLength(); i++)
 	{
+		//If the node to finds data is equal to the object
+		//return true
 		if (nodeToFind->data == object)
 		{
-			std::cout << "Node found" << std::endl;
 			return true;
 		}
+		//Otherwise...
 		else
 		{
+			//Go on to the next node
 			nodeToFind = nodeToFind->next;
 		}
 	}
@@ -247,15 +258,19 @@ bool List<T>::insert(const T& value, int index)
 	//Set a current node to be the first in the list
 	Node<T>* currentNode = m_first;
 
+	//If the index to insert a node is the first index...
 	if (index == 0)
 	{
+		//...push the node at the front of the list
 		pushFront(value);
 		return true;
 
 	}
 
+	//If the index to insert a node is the last index in the list...
 	if (index == getLength())
 	{
+		//...push the node to the back of the list
 		pushBack(value);
 		return true;
 	}
@@ -310,10 +325,19 @@ bool List<T>::remove(const T& value)
 		//If the data in the current node is equal to the value that should be removed...
 		if (currentNode->data == value)
 		{
+			//If the current nodes previous node is null...
 			if (currentNode->previous == nullptr)
+			{
+				//...set the first node to be the current nodes next
 				m_first = currentNode->next;
+			}
+			//If the current noded next node is null...
 			else if (currentNode->next == nullptr)
+			{
+				//...set the last node to be the current nodes previous
 				m_last = currentNode->previous;
+			}
+			//Otherwise...
 			else
 			{
 				//...set the current nodes nexts previous to be teh current nodes previous
@@ -367,6 +391,8 @@ void List<T>::initialize()
 template<typename T>
 bool List<T>::isEmpty() const
 {
+	//If the first and last node in the list are null and the node count is 0,
+	//the list is empty
 	if (m_first == nullptr && m_last == nullptr && m_nodeCount == 0)
 		return true;
 	else
@@ -376,16 +402,21 @@ bool List<T>::isEmpty() const
 template<typename T>
 bool List<T>::getData(Iterator<T>& iter, int index)
 {
+	//If the list is empty...
 	if (index <= 0 || index > getLength())
+		//...exit function
 		return false;
 
+	//Set the iterator to be the begining of the list
 	iter = begin();
 
+	//Interate through the list
 	for (int i = 0; i < index; i++)
 	{
+		//Increment the iterater
 		++iter;
 	}
-
+	
 	return true;
 }
 
@@ -407,21 +438,29 @@ const List<T>& List<T>::operator=(const List<T>& otherList)
 template<typename T>
 void List<T>::sort()
 {
+	//Create a new node
 	Node<T>* newNode = new Node<T>();
+	//Create a node that keeps track of the current node and set it to the first node in the list
 	Node<T>* currentNode = m_first;
 
+	//Iterate through the list
 	for (int i = 0; i < m_nodeCount - 1; i++)
 	{
+		//Reset the current node to be the first node
 		currentNode = m_first;
 
+		//Compare the the current nodes data the the current nodes next data
 		for (int j = 0; j < m_nodeCount - 1; j++)
 		{ 
+			//If the current nodes next data is less the current nodes data...
 			if (currentNode->next->data < currentNode->data)
 			{
+				//Swap the nodes 
 				newNode->data = currentNode->next->data;
 				currentNode->next->data = currentNode->data;
 				currentNode->data = newNode->data;
 			}
+			//Move on to the next node
 			currentNode = currentNode->next;
 		}
 	}
