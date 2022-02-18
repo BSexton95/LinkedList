@@ -2,56 +2,59 @@
 
 void main()
 {
-	/*List<int> list = List<int>();
+	List<int> list = List<int>();
 
+    //Testing push front function
+    std::cout << "Testing pushFront Function: " << std::endl;
 	list.pushFront(1);
 	list.pushFront(2);
 	list.pushFront(3);
-	list.pushFront(5);
+    list.print();
+    std::cout << "" << std::endl;
+
+    //Tesing push back function
+    std::cout << "Testing pushBack Function: " << std::endl;
 	list.pushBack(6);
+    list.pushBack(11);
+    list.print();
+    std::cout << "" << std::endl;
+
+    //Testing insert function
+    std::cout << "Testing insert Function" << std::endl;
+    list.insert(10, 2);
+    list.print();
+    std::cout << "" << std::endl;
+    
+    //Testing contains function
+    std::cout << "Testing contains Function: " << std::endl;
+    if (list.contains(1))
+        std::cout << "Cantains 1" << std::endl;
+    std::cout << "" << std::endl;
+
+    //Testing remove function
+    std::cout << "Testing remove Function: " << std::endl;
+    list.remove(6);
+    list.remove(1);
+    list.print();
+    std::cout << "" << std::endl;
+
+    //Testing the sort function
+    std::cout << "Testing the sort Function: " << std::endl;
 	list.sort();
 	list.print();
+    std::cout << "" << std::endl;
 
+    //Testing the equals operator
+    std::cout << "Testing the Equals Operator Function: " << std::endl;
 	List<int> list1 = List<int>();
 
 	list1 = list;
+	list1.print();
+    std::cout << "" << std::endl;
 
-	list1.print();*/
-
-    List<int> list = List<int>();
-
-    list.pushBack(2);
-    list.pushFront(1);
-    list.pushFront(12);
-    list.pushBack(15);
-    list.pushBack(14);
-    list.insert(200, 5);
-    list.insert(149, 0);
-    list.remove(200);
-    list.remove(149);
-    list.sort();
-
-    list.print();
-
-    std::cout << " " << std::endl;
-
-    list.destroy();
-    list.destroy();
-    list.insert(10, 0);
-    list.insert(45, 1);
-    list.pushBack(47);
-    list.print();
-
-    std::cout << " " << std::endl;
-
-    List<int> listTwo = List<int>();
-
-    listTwo = list;
-
-    list.destroy();
-
-    listTwo.pushFront(88);
-
-    listTwo.print();
-    listTwo.contains(88);
+    //Testing the destroy function and isEmpty function
+    std::cout << "Testing the destroy and isEmpty Function: " << std::endl;
+    list1.destroy();
+    if (list1.isEmpty())
+        std::cout << "List is empty" << std::endl;
 }
