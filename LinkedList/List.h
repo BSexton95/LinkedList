@@ -423,15 +423,20 @@ bool List<T>::getData(Iterator<T>& iter, int index)
 template<typename T>
 const List<T>& List<T>::operator=(const List<T>& otherList)
 {
+	//Destroy the list that is being copyed over
 	destroy();
+
+	//Create a new node that is set to be the first node in the list being copyed
 	Node<T>* newNode = otherList.m_first;
 
+	//Loop throught the list and copy each node into the new list
 	for (int i = 0; i < otherList.getLength(); i++)
 	{
 		insert(newNode->data, i);
 		newNode = newNode->next;
 	}
 
+	//Return the new lisst
 	return *this;
 }
 
